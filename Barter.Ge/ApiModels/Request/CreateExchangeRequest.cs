@@ -1,24 +1,22 @@
 ﻿using Barter.Ge.DAL.Context.Enum;
+using System.ComponentModel.DataAnnotations;
 
-namespace Barter.Ge.BLL.Models;
+namespace Barter.Ge.Api.ApiModels.Request;
 
-public class Exchange
+public class CreateExchangeRequest
 {
-    public Guid Id { get; set; }
-
+    [Required]
     public Guid InitiatorId { get; set; }
 
+    [Required]
     public Guid ReceiverId { get; set; }
 
+    [Required]
     public Guid ItemOfferedId { get; set; }
 
+    [Required]
     public Guid ItemRequestedId { get; set; }
 
+    [Required]
     public ExchangeStatus Status { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public DateTime? ExchangedAt { get; set; }
 }

@@ -19,7 +19,7 @@ public class ItemConfig : IEntityTypeConfiguration<ItemEntity>
         {
             new ItemEntity
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("0e036fa2-6532-4e20-92f8-fcf0265f49f2"),
                 Name = "Electronic Item",
                 Description = "This is an example item.",
                 CategoryId = Guid.Parse("74892eba-ae27-467b-8f4b-5060b46fd76c"),
@@ -30,7 +30,7 @@ public class ItemConfig : IEntityTypeConfiguration<ItemEntity>
             },
             new ItemEntity
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("9def0b9a-4bf7-4f58-87b4-317357f164e6"),
                 Name = "Clothing Item",
                 Description = "This is an example item.",
                 CategoryId = Guid.Parse("da221366-a4ad-45d0-a6ab-9716bd4e8625"),

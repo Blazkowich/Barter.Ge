@@ -1,17 +1,22 @@
 ﻿using Barter.Ge.BLL.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
-namespace Barter.Ge.BLL.Models;
+namespace Barter.Ge.Api.ApiModels.Request;
 
-public class Item
+public class UpdateItemRequest
 {
+    [Required]
     public Guid Id { get; set; }
 
+    [Required]
     public string Name { get; set; }
 
     public string Description { get; set; }
 
+    [Required]
     public Guid CategoryId { get; set; }
 
+    [Required]
     public Guid OwnerId { get; set; }
 
     public ConditionStatus Condition { get; set; }
@@ -20,4 +25,3 @@ public class Item
 
     public int Views { get; set; }
 }
-

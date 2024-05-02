@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using Barter.Ge.BLL.CustomExceptions;
 using Barter.Ge.BLL.Models;
-using Barter.Ge.BLL.Models.Enum;
 using Barter.Ge.BLL.Models.Search;
 using Barter.Ge.BLL.Models.Search.Context;
 using Barter.Ge.BLL.Services.Interfaces;
 using Barter.Ge.DAL.Context.Entities;
 using Barter.Ge.DAL.Context.Paging;
 using Barter.Ge.DAL.Repositories.UnitOfWork;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;
 
 namespace Barter.Ge.BLL.Services;
@@ -48,7 +46,7 @@ public class CategoryService(IUnitOfWork unitOfWork, IMapper mapper) : ICategory
         await _unitOfWork.CategoryRepository.DeleteAsync(existingCategory.Items.FirstOrDefault());
     }
 
-    public async Task<SearchResult<Category>> SearchCategoriesWithPaging(CategorySearchContext context)
+    public async Task<SearchResult<Category>> SearchCategoriesWithPagingAsync(CategorySearchContext context)
     {
         Expression<Func<CategoryEntity, bool>> filter = x =>
             (!context.Id.HasValue || x.Id == context.Id.Value) &&

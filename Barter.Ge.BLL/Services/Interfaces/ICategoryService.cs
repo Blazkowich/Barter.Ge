@@ -8,7 +8,7 @@ public interface ICategoryService
 {
     Task<Guid> AddCategoryAsync(Category category);
 
-    Task<SearchResult<Category>> SearchCategoriesWithPaging(CategorySearchContext context);
+    Task<SearchResult<Category>> SearchCategoriesWithPagingAsync(CategorySearchContext context);
 
     Task<Category> UpdateCategoryAsync(Category category);
 

@@ -1,8 +1,8 @@
 ﻿using Barter.Ge.DAL.Context.Enum;
 
-namespace Barter.Ge.BLL.Models;
+namespace Barter.Ge.Api.ApiModels.Response;
 
-public class Exchange
+public class ExchangeResponse
 {
     public Guid Id { get; set; }
 

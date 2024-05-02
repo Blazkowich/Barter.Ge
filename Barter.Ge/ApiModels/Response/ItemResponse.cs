@@ -1,8 +1,9 @@
 ﻿using Barter.Ge.BLL.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
-namespace Barter.Ge.BLL.Models;
+namespace Barter.Ge.Api.ApiModels.Response;
 
-public class Item
+public class ItemResponse
 {
     public Guid Id { get; set; }
 
@@ -20,4 +21,3 @@ public class Item
 
     public int Views { get; set; }
 }
-

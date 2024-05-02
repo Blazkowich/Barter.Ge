@@ -34,7 +34,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
     {
         var searchContext = new CategorySearchContext { Id = id };
 
-        var getCategoryById = await _categoryService.SearchCategoriesWithPaging(searchContext);
+        var getCategoryById = await _categoryService.SearchCategoriesWithPagingAsync(searchContext);
 
         return _mapper.Map<CategoryResponse>(getCategoryById.Items.SingleOrDefault());
     }
@@ -44,7 +44,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
     {
         var searchContext = new CategorySearchContext { Name = name };
 
-        var getCategoryByName = await _categoryService.SearchCategoriesWithPaging(searchContext);
+        var getCategoryByName = await _categoryService.SearchCategoriesWithPagingAsync(searchContext);
 
         return _mapper.Map<CategoryResponse>(getCategoryByName.Items.SingleOrDefault());
     }
@@ -52,7 +52,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
     [HttpGet]
     public async Task<List<CategoryResponse>> GetAllCategories([FromQuery] CategorySearchContext searchContext)
     {
-        var getAllCategories = await _categoryService.SearchCategoriesWithPaging(searchContext);
+        var getAllCategories = await _categoryService.SearchCategoriesWithPagingAsync(searchContext);
 
         return _mapper.Map<List<CategoryResponse>>(getAllCategories.Items);
     }

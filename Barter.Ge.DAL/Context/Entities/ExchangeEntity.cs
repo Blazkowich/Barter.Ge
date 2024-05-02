@@ -21,10 +21,10 @@ namespace Barter.Ge.DAL.Context.Entities
 
         public int Status { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        public DateTime ExchangedAt { get; set; }
+        public DateTime? ExchangedAt { get; set; } = DateTime.UtcNow;
     }
 }
