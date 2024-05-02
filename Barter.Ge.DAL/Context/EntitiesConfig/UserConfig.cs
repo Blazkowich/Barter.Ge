@@ -9,6 +9,8 @@ public class UserConfig : IEntityTypeConfiguration<UserEntity>
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
         builder.HasKey(x => x.Id);
+
+        SeedUsers(builder);
     }
 
     private static void SeedUsers(EntityTypeBuilder<UserEntity> builder)

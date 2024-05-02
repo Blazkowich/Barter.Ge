@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barter.Ge.DAL.Migrations
 {
     [DbContext(typeof(BarterDbContext))]
-    [Migration("20240502181507_Initial")]
+    [Migration("20240502205730_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -67,10 +67,10 @@ namespace Barter.Ge.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ExchangedAt")
+                    b.Property<DateTime?>("ExchangedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("InitiatorId")
@@ -88,7 +88,7 @@ namespace Barter.Ge.DAL.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -111,6 +111,9 @@ namespace Barter.Ge.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ItemType")
                         .HasColumnType("int");
 
@@ -130,10 +133,11 @@ namespace Barter.Ge.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3d9d4985-e07b-47d8-bc8b-0dee01804336"),
+                            Id = new Guid("0e036fa2-6532-4e20-92f8-fcf0265f49f2"),
                             CategoryId = new Guid("74892eba-ae27-467b-8f4b-5060b46fd76c"),
                             Condition = 0,
                             Description = "This is an example item.",
+                            ImageUrl = "image1.jpg",
                             ItemType = 0,
                             Name = "Electronic Item",
                             OwnerId = new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"),
@@ -141,10 +145,11 @@ namespace Barter.Ge.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bb564da6-2be3-4b80-9655-b3cfd653d054"),
+                            Id = new Guid("9def0b9a-4bf7-4f58-87b4-317357f164e6"),
                             CategoryId = new Guid("da221366-a4ad-45d0-a6ab-9716bd4e8625"),
                             Condition = 1,
                             Description = "This is an example item.",
+                            ImageUrl = "image2.jpg",
                             ItemType = 1,
                             Name = "Clothing Item",
                             OwnerId = new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"),
@@ -179,6 +184,28 @@ namespace Barter.Ge.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"),
+                            Address = "Address1",
+                            Email = "user1@example.com",
+                            MobileNumber = 1234567890L,
+                            Password = "password1",
+                            ProfilePicture = "profile1.jpg",
+                            Username = "Vaja"
+                        },
+                        new
+                        {
+                            Id = new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"),
+                            Address = "Address2",
+                            Email = "user2@example.com",
+                            MobileNumber = 9876543210L,
+                            Password = "password2",
+                            ProfilePicture = "profile2.jpg",
+                            Username = "Goga"
+                        });
                 });
 
             modelBuilder.Entity("Barter.Ge.DAL.Context.Entities.CategoryEntity", b =>

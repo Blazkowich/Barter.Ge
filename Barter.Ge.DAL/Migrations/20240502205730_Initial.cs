@@ -42,9 +42,9 @@ namespace Barter.Ge.DAL.Migrations
                     ItemOfferedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ItemRequestedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExchangedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExchangedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,6 +60,7 @@ namespace Barter.Ge.DAL.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Condition = table.Column<int>(type: "int", nullable: false),
                     ItemType = table.Column<int>(type: "int", nullable: false),
                     Views = table.Column<int>(type: "int", nullable: false)
@@ -97,11 +98,20 @@ namespace Barter.Ge.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Items",
-                columns: new[] { "Id", "CategoryId", "Condition", "Description", "ItemType", "Name", "OwnerId", "Views" },
+                columns: new[] { "Id", "CategoryId", "Condition", "Description", "ImageUrl", "ItemType", "Name", "OwnerId", "Views" },
                 values: new object[,]
                 {
-                    { new Guid("3d9d4985-e07b-47d8-bc8b-0dee01804336"), new Guid("74892eba-ae27-467b-8f4b-5060b46fd76c"), 0, "This is an example item.", 0, "Electronic Item", new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"), 10 },
-                    { new Guid("bb564da6-2be3-4b80-9655-b3cfd653d054"), new Guid("da221366-a4ad-45d0-a6ab-9716bd4e8625"), 1, "This is an example item.", 1, "Clothing Item", new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"), 20 }
+                    { new Guid("0e036fa2-6532-4e20-92f8-fcf0265f49f2"), new Guid("74892eba-ae27-467b-8f4b-5060b46fd76c"), 0, "This is an example item.", "image1.jpg", 0, "Electronic Item", new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"), 10 },
+                    { new Guid("9def0b9a-4bf7-4f58-87b4-317357f164e6"), new Guid("da221366-a4ad-45d0-a6ab-9716bd4e8625"), 1, "This is an example item.", "image2.jpg", 1, "Clothing Item", new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"), 20 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "Email", "MobileNumber", "Password", "ProfilePicture", "Username" },
+                values: new object[,]
+                {
+                    { new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"), "Address1", "user1@example.com", 1234567890L, "password1", "profile1.jpg", "Vaja" },
+                    { new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"), "Address2", "user2@example.com", 9876543210L, "password2", "profile2.jpg", "Goga" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -71,6 +71,7 @@ public class AutomapperProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
             .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.OwnerId))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
             .ForMember(dest => dest.Condition, opt => opt.MapFrom(src => src.Condition))
             .ForMember(dest => dest.ItemType, opt => opt.MapFrom(src => src.ItemType))
             .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.Views));
@@ -81,6 +82,7 @@ public class AutomapperProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
             .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.OwnerId))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
             .ForMember(dest => dest.Condition, opt => opt.MapFrom(src => src.Condition))
             .ForMember(dest => dest.ItemType, opt => opt.MapFrom(src => src.ItemType))
             .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.Views));
@@ -91,9 +93,39 @@ public class AutomapperProfile : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
             .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.OwnerId))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
             .ForMember(dest => dest.Condition, opt => opt.MapFrom(src => src.Condition))
             .ForMember(dest => dest.ItemType, opt => opt.MapFrom(src => src.ItemType))
             .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.Views));
+        #endregion
+
+        #region User Mapping
+        CreateMap<CreateUserRequest, User>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
+            .ForMember(dest => dest.MobileNumber, opt => opt.MapFrom(src => src.MobileNumber))
+            .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+            .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture));
+
+        CreateMap<UpdateUserRequest, User>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
+            .ForMember(dest => dest.MobileNumber, opt => opt.MapFrom(src => src.MobileNumber))
+            .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+            .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture));
+
+        CreateMap<User, UserResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
+            .ForMember(dest => dest.MobileNumber, opt => opt.MapFrom(src => src.MobileNumber))
+            .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+            .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture));
         #endregion
     }
 }

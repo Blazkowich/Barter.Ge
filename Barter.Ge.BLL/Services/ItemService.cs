@@ -45,7 +45,7 @@ internal class ItemService(IUnitOfWork unitOfWork, IMapper mapper) : IItemServic
             throw new NotFoundException($"No Item was found on Name '{name}' For The Remove.");
         }
 
-        await _unitOfWork.ItemRepository.DeleteAsync(existingItem.Items.FirstOrDefault());
+        await _unitOfWork.ItemRepository.DeleteAsync(existingItem.Items.SingleOrDefault());
     }
 
     public async Task<SearchResult<Item>> SearchItemWithPagingAsync(ItemSearchContext context)

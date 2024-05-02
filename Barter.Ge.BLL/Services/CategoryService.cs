@@ -43,7 +43,7 @@ public class CategoryService(IUnitOfWork unitOfWork, IMapper mapper) : ICategory
             throw new NotFoundException($"No Category was found on Name '{name}' For The Remove.");
         }
 
-        await _unitOfWork.CategoryRepository.DeleteAsync(existingCategory.Items.FirstOrDefault());
+        await _unitOfWork.CategoryRepository.DeleteAsync(existingCategory.Items.SingleOrDefault());
     }
 
     public async Task<SearchResult<Category>> SearchCategoriesWithPagingAsync(CategorySearchContext context)

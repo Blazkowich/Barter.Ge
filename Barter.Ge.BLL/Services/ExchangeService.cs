@@ -45,7 +45,7 @@ internal class ExchangeService(IUnitOfWork unitOfWork, IMapper mapper) : IExchan
             throw new NotFoundException($"No Exchange was found For The Remove.");
         }
 
-        await _unitOfWork.ExchangeRepository.DeleteAsync(existingExchange.Items.FirstOrDefault());
+        await _unitOfWork.ExchangeRepository.DeleteAsync(existingExchange.Items.SingleOrDefault());
     }
 
     public async Task<SearchResult<Exchange>> SearchExchangeWithPagingAsync(ExchangeSearchContext context)
@@ -140,7 +140,7 @@ internal class ExchangeService(IUnitOfWork unitOfWork, IMapper mapper) : IExchan
 
         if (checkIfExchangeExistsTask is null || checkIfExchangeExistsTask.Items.Count == 0)
         {
-            throw new BadRequestException($"Category Does Not Exists.");
+            throw new BadRequestException($"Exchange Does Not Exists.");
         }
     }
 }

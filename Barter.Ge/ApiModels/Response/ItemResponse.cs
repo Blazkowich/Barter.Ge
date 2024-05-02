@@ -15,6 +15,8 @@ public class ItemResponse
 
     public Guid OwnerId { get; set; }
 
+    public string ImageUrl { get; set; }
+
     public ConditionStatus Condition { get; set; }
 
     public ItemType ItemType { get; set; }

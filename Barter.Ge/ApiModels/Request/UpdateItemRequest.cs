@@ -19,6 +19,9 @@ public class UpdateItemRequest
     [Required]
     public Guid OwnerId { get; set; }
 
+    [Required]
+    public string ImageUrl { get; set; }
+
     public ConditionStatus Condition { get; set; }
 
     public ItemType ItemType { get; set; }

@@ -53,6 +53,7 @@ public class AutomapperProfileBLL : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
             .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.OwnerId))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
             .ForMember(dest => dest.Condition, opt => opt.MapFrom(src => src.Condition))
             .ForMember(dest => dest.ItemType, opt => opt.MapFrom(src => src.ItemType))
             .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.Views));
@@ -63,6 +64,7 @@ public class AutomapperProfileBLL : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
             .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.OwnerId))
+            .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
             .ForMember(dest => dest.Condition, opt => opt.MapFrom(src => src.Condition))
             .ForMember(dest => dest.ItemType, opt => opt.MapFrom(src => src.ItemType))
             .ForMember(dest => dest.Views, opt => opt.MapFrom(src => src.Views));

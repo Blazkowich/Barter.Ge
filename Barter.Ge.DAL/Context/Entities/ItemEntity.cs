@@ -16,6 +16,8 @@ public class ItemEntity
     [ForeignKey("OwnerId")]
     public Guid OwnerId { get; set; }
 
+    public string ImageUrl { get; set; }
+
     public int Condition { get; set; }
 
     public int ItemType { get; set; }
