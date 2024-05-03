@@ -8,7 +8,7 @@ using Barter.Ge.DAL.Context.Entities;
 using Barter.Ge.DAL.Context.Paging;
 using Barter.Ge.DAL.Repositories.UnitOfWork;
 using System.Linq.Expressions;
-using Barter.Ge.DAL.Context.Enum;
+using Barter.Ge.BLL.Models.Enum;
 
 namespace Barter.Ge.BLL.Services;
 

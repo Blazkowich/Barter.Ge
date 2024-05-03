@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Net.Http;
 
 namespace Barter.Ge.Api.Bootstrapping.Middleware;
 

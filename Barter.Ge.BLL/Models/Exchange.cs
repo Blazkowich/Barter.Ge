@@ -1,4 +1,4 @@
-﻿using Barter.Ge.DAL.Context.Enum;
+﻿using Barter.Ge.BLL.Models.Enum;
 
 namespace Barter.Ge.BLL.Models;
 

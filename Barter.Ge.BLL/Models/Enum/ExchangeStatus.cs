@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Barter.Ge.DAL.Context.Enum;
+namespace Barter.Ge.BLL.Models.Enum;
 
 public enum ExchangeStatus
 {

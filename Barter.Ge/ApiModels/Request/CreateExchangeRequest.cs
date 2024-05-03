@@ -1,4 +1,4 @@
-﻿using Barter.Ge.DAL.Context.Enum;
+﻿using Barter.Ge.BLL.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace Barter.Ge.Api.ApiModels.Request;
