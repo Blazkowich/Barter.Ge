@@ -1,5 +1,7 @@
 ﻿using Barter.Domain.Models.Enum;
 
+#nullable enable
+
 namespace Barter.Domain.Models.Search.Context;
 
 public class ItemSearchContext : SearchContextBase
