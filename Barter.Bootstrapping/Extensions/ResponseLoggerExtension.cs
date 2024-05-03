@@ -4,7 +4,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
 
-namespace Barter.Ge.Api.Bootstrapping.Extensions;
+namespace Barter.Bootstrapping.Extensions;
 
 
 public static class ResponseLoggerExtension

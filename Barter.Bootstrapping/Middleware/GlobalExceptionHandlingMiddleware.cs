@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Barter.Ge.Api.Bootstrapping.Middleware;
+namespace Barter.Bootstrapping.Middleware;
 
 public class GlobalExceptionHandlingMiddleware(
     RequestDelegate next,

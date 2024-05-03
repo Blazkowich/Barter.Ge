@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 
-namespace Barter.Ge.Api.Bootstrapping.Middleware;
+namespace Barter.Bootstrapping.Middleware;
 
 public class GlobalExceptionHandler(IReadOnlyDictionary<Type, HttpStatusCode> handledExceptionsMap) : IExceptionHandler
 {

@@ -1,8 +1,6 @@
 using Barter.Application;
 using Barter.Application.CustomExceptions;
 using Barter.Application.MappingProfiles;
-using Barter.Ge.Api.Bootstrapping.Extensions;
-using Barter.Ge.Api.Bootstrapping.Middleware;
 using Barter.Infrastructure;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.OpenApi.Models;
@@ -11,6 +9,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Barter.Bootstrapping.Extensions;
+using Barter.Bootstrapping.Middleware;
 
 namespace Barter.Api
 {

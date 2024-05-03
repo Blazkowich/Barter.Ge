@@ -1,8 +1,8 @@
-﻿using Barter.Ge.Api.Bootstrapping.Middleware;
+﻿using Barter.Bootstrapping.Middleware;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
-namespace Barter.Ge.Api.Bootstrapping.Extensions;
+namespace Barter.Bootstrapping.Extensions;
 
 public static class GlobalExceptionHandlingMiddlewareExtension
 {

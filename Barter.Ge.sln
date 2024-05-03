@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Bootstrapping", "Barter.Ge.Api.Bootstrapping\Barter.Bootstrapping.csproj", "{F5A24EB6-5904-4482-9D60-4AB313436B59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Bootstrapping", "Barter.Bootstrapping\Barter.Bootstrapping.csproj", "{F5A24EB6-5904-4482-9D60-4AB313436B59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barter.Domain", "Barter.Domain\Barter.Domain.csproj", "{8B264DE6-BC26-4F22-8F62-F3F32392A4C4}"
 EndProject

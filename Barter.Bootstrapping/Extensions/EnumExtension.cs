@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Barter.Ge.Api.Bootstrapping.Extensions;
+namespace Barter.Bootstrapping.Extensions;
 
 public static class EnumExtension
 {

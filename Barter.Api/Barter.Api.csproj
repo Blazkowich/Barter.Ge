@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Barter.Application\Barter.Application.csproj" />
+    <ProjectReference Include="..\Barter.Bootstrapping\Barter.Bootstrapping.csproj" />
     <ProjectReference Include="..\Barter.Ge.Api.Bootstrapping\Barter.Bootstrapping.csproj" />
     <ProjectReference Include="..\Barter.Infrastructure\Barter.Infrastructure.csproj" />
   </ItemGroup>
