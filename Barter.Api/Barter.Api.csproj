@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Barter.Application\Barter.Application.csproj" />
     <ProjectReference Include="..\Barter.Bootstrapping\Barter.Bootstrapping.csproj" />
-    <ProjectReference Include="..\Barter.Ge.Api.Bootstrapping\Barter.Bootstrapping.csproj" />
     <ProjectReference Include="..\Barter.Infrastructure\Barter.Infrastructure.csproj" />
   </ItemGroup>
 
