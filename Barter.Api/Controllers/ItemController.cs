@@ -48,6 +48,16 @@ public class ItemController(IItemService itemService, IMapper mapper) : Controll
         return _mapper.Map<ItemResponse>(getItemByName.Items.SingleOrDefault());
     }
 
+    [HttpGet("{categoryId}/items")]
+    public async Task<List<ItemResponse>> GetItemsByCategoryId(Guid categoryId)
+    {
+        var searchContext = new ItemSearchContext { CategoryId = categoryId };
+
+        var getItemByCategoryId = await _itemService.SearchItemWithPagingAsync(searchContext);
+
+        return _mapper.Map<List<ItemResponse>>(getItemByCategoryId.Items);
+    }
+
     [HttpGet]
     public async Task<List<ItemResponse>> GetAllItems([FromQuery] ItemSearchContext searchContext)
     {
