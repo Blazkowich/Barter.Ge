@@ -20,6 +20,14 @@ namespace Barter.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
@@ -115,10 +123,11 @@ namespace Barter.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors("AllowAngular");
+
             app.UseAuthorization();
 
             app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
-
             app.MapControllers();
 
             app.Run();
