@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Barter.Infrastructure.Migrations
+namespace Barter.Infrastructure.Migrations.BarterDb
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -55,11 +56,11 @@ namespace Barter.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Condition = table.Column<int>(type: "int", nullable: false),
                     ItemType = table.Column<int>(type: "int", nullable: false),
                     Views = table.Column<int>(type: "int", nullable: false)
@@ -70,20 +71,32 @@ namespace Barter.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<long>(type: "bigint", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
@@ -102,15 +115,6 @@ namespace Barter.Infrastructure.Migrations
                 {
                     { new Guid("0e036fa2-6532-4e20-92f8-fcf0265f49f2"), new Guid("74892eba-ae27-467b-8f4b-5060b46fd76c"), 0, "This is an example item.", "image1.jpg", 0, "Electronic Item", new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"), 10 },
                     { new Guid("9def0b9a-4bf7-4f58-87b4-317357f164e6"), new Guid("da221366-a4ad-45d0-a6ab-9716bd4e8625"), 1, "This is an example item.", "image2.jpg", 1, "Clothing Item", new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"), 20 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "Email", "MobileNumber", "Password", "ProfilePicture", "Username" },
-                values: new object[,]
-                {
-                    { new Guid("363e30bc-5062-47ea-a3a7-ac50fb85b5a0"), "Address1", "user1@example.com", 1234567890L, "password1", "profile1.jpg", "Vaja" },
-                    { new Guid("adc71544-77af-4102-ad2b-45e6a6bef40d"), "Address2", "user2@example.com", 9876543210L, "password2", "profile2.jpg", "Goga" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -132,7 +136,7 @@ namespace Barter.Infrastructure.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
         }
     }
 }

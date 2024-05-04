@@ -1,16 +1,21 @@
-﻿namespace Barter.Domain.Models;
+﻿using Barter.Domain.Models.Enum;
+using Microsoft.AspNetCore.Identity;
 
-public class User
+namespace Barter.Domain.Models;
+
+public class User : IdentityUser
 {
-    public Guid Id { get; set; }
+    public string FirstName { get; set; }
 
-    public string Username { get; set; }
+    public string LastName { get; set; }
 
-    public string Email { get; set; }
+    public new string Email { get; set; }
 
     public string Password { get; set; }
 
     public long MobileNumber { get; set; }
+
+    public UserRoles Roles { get; set; }
 
     public string Address { get; set; }
 

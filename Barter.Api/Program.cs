@@ -23,6 +23,8 @@ namespace Barter.Api
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.ConfigureLogger();
             builder.Host.UseSerilog();
 

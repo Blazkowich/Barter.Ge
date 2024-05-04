@@ -5,13 +5,15 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Bootstrapping", "Barter.Bootstrapping\Barter.Bootstrapping.csproj", "{F5A24EB6-5904-4482-9D60-4AB313436B59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barter.Domain", "Barter.Domain\Barter.Domain.csproj", "{8B264DE6-BC26-4F22-8F62-F3F32392A4C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Domain", "Barter.Domain\Barter.Domain.csproj", "{8B264DE6-BC26-4F22-8F62-F3F32392A4C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barter.Application", "Barter.Application\Barter.Application.csproj", "{A0BAAF74-3C18-4B73-9C89-2E25701E5CE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Application", "Barter.Application\Barter.Application.csproj", "{A0BAAF74-3C18-4B73-9C89-2E25701E5CE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barter.Infrastructure", "Barter.Infrastructure\Barter.Infrastructure.csproj", "{755CAD30-8898-4F84-A378-A739BEFAC207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Infrastructure", "Barter.Infrastructure\Barter.Infrastructure.csproj", "{755CAD30-8898-4F84-A378-A739BEFAC207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barter.Api", "Barter.Api\Barter.Api.csproj", "{79C9A6E3-2E4E-492F-A1CC-AB78AE236E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barter.Api", "Barter.Api\Barter.Api.csproj", "{79C9A6E3-2E4E-492F-A1CC-AB78AE236E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barter.Shared", "Barter.Shared\Barter.Shared.csproj", "{292B6936-6952-4BB8-AE89-8D56E387292B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{79C9A6E3-2E4E-492F-A1CC-AB78AE236E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C9A6E3-2E4E-492F-A1CC-AB78AE236E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C9A6E3-2E4E-492F-A1CC-AB78AE236E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{292B6936-6952-4BB8-AE89-8D56E387292B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292B6936-6952-4BB8-AE89-8D56E387292B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292B6936-6952-4BB8-AE89-8D56E387292B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292B6936-6952-4BB8-AE89-8D56E387292B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

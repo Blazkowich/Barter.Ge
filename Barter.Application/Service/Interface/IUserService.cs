@@ -1,16 +1,25 @@
 ﻿using Barter.Domain.Models;
-using Barter.Domain.Models.Search;
-using Barter.Domain.Models.Search.Context;
+using Barter.Domain.Models.Enum;
 
 namespace Barter.Application.Service.Interface;
 
 public interface IUserService
 {
-    Task<Guid> AddUserAsync(User user);
+    Task<User> AddUserAsync(User user);
 
-    Task<SearchResult<User>> SearchUserWithPagingAsync(UserSearchContext context);
+    Task RemoveUserAsync(User user);
 
-    Task<User> UpdateUserAsync(User user);
+    Task UpdateUserAsync(User user);
 
-    Task DeleteUserAsync(string userName);
+    Task<User> GetUserByUserNameAsync(string userName);
+
+    Task<User> SignUpAsync(string userName, string email, string password);
+
+    Task SignInAsync(User user, string password);
+
+    Task SignOutAsync();
+
+    Task<List<User>> GetAllUsersAsync();
+
+    Task<bool> AssignRoleToUser(string userId, UserRoles roleName);
 }

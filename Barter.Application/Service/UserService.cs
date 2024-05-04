@@ -3,135 +3,157 @@ using Barter.Application.CustomExceptions;
 using Barter.Application.Service.Interface;
 using Barter.Application.UnitOfWork;
 using Barter.Domain.Models;
-using Barter.Domain.Models.Paging;
-using Barter.Domain.Models.Search;
-using Barter.Domain.Models.Search.Context;
-using System.Linq.Expressions;
+using Barter.Domain.Models.Enum;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Barter.Application.Service;
 
-internal class UserService(IUnitOfWork unitOfWork, IMapper mapper) : IUserService
+internal class UserService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager) : IUserService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly UserManager<User> _userManager = userManager;
+    private readonly SignInManager<User> _signInManager = signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<Guid> AddUserAsync(User user)
+    public async Task<User> AddUserAsync(User user)
     {
-        await ValidateCreatePreconditionsForUserAsync(user);
+        var applicationUser = _mapper.Map<User>(user);
+        var result = await _userManager.CreateAsync(applicationUser, user.Password);
 
-        var createdUser = _unitOfWork.UserRepository
-            .Add(_mapper.Map<User>(user));
+        if (!result.Succeeded)
+        {
+            throw new ValidationException(result.Errors.FirstOrDefault().Description);
+        }
 
+        var userEntity = await _userManager.FindByNameAsync(user.UserName);
+
+        var isInRole = await _userManager.IsInRoleAsync(userEntity, user.Roles.ToString());
+        if (!isInRole)
+        {
+            var roleAssignmentResult = await _userManager.AddToRoleAsync(userEntity, user.Roles.ToString());
+            if (!roleAssignmentResult.Succeeded)
+            {
+                throw new Exception("Failed to assign role to user.");
+            }
+        }
+
+        return user;
+    }
+
+    public async Task RemoveUserAsync(User user)
+    {
+        var applicationUser = await _userManager.FindByNameAsync(user.UserName);
+        if (applicationUser == null)
+        {
+            throw new NotFoundException("User not found");
+        }
+
+        await _userManager.DeleteAsync(applicationUser);
         await _unitOfWork.SaveAsync();
-
-        return createdUser.Id;
     }
 
-    public async Task DeleteUserAsync(string userName)
+    public async Task UpdateUserAsync(User user)
     {
-        var pagingRequest = new EntitiesPagingRequest<User>
+        var applicationUser = await _userManager.FindByNameAsync(user.UserName);
+        if (applicationUser == null)
         {
-            Filter = g => g.Username == userName,
-            PageNumber = 1,
-            PerPage = int.MaxValue,
-        };
-
-        var existingUser = await _unitOfWork.UserRepository.SearchWithPagingAsync(pagingRequest);
-
-        if (!existingUser.Items.Any())
-        {
-            throw new NotFoundException($"No User was found on Name '{userName}' For The Remove.");
+            throw new NotFoundException("User not found");
         }
 
-        await _unitOfWork.UserRepository.DeleteAsync(existingUser.Items.SingleOrDefault());
+        applicationUser.Email = user.Email;
+        await _userManager.UpdateAsync(applicationUser);
+        await _unitOfWork.SaveAsync();
     }
 
-    public async Task<SearchResult<User>> SearchUserWithPagingAsync(UserSearchContext context)
+    public async Task<User> GetUserByUserNameAsync(string userName)
     {
-        Expression<Func<User, bool>> filter = x =>
-            (!context.Id.HasValue || x.Id == context.Id.Value) &&
-            (string.IsNullOrEmpty(context.Username) || x.Username == context.Username) &&
-            (string.IsNullOrEmpty(context.Email) || x.Email == context.Email) &&
-            (string.IsNullOrEmpty(context.Password) || x.Password == context.Password) &&
-            (!context.MobileNumber.HasValue || x.MobileNumber == context.MobileNumber.Value) &&
-            (string.IsNullOrEmpty(context.Address) || x.Address == context.Address);
-
-        var pagingRequest = new EntitiesPagingRequest<User>
-        {
-            Filter = filter,
-            PageNumber = context.PageNumber,
-            PerPage = context.PerPage,
-        };
-
-        var result = await _unitOfWork.UserRepository.SearchWithPagingAsync(pagingRequest);
-
-        if (!result.Items.Any())
-        {
-            throw new NotFoundException("User Was Not Found");
-        }
-
-        return new SearchResult<User>
-        {
-            Items = _mapper.Map<List<User>>(result.Items),
-            ItemsTotalCount = result.ItemsTotalCount,
-            PageNumber = result.PageNumber,
-            PerPage = result.PerPage,
-        };
+        var applicationUser = await _userManager.FindByNameAsync(userName);
+        return _mapper.Map<User>(applicationUser);
     }
 
-    public async Task<User> UpdateUserAsync(User user)
+    public async Task<User> SignUpAsync(string userName, string email, string password)
     {
-        await ValidateUpdatePreconditionsForUserAsync(user);
+        var user = new User { UserName = userName, Email = email };
+        var result = await _userManager.CreateAsync(user, password);
 
-        var userForUpdate = await _unitOfWork.UserRepository.UpdateAsync(_mapper.Map<User>(user));
+        if (!result.Succeeded)
+        {
+            throw new ValidationException(result.Errors.First().Description);
+        }
 
-        return _mapper.Map<User>(userForUpdate);
+        await _signInManager.SignInAsync(user, isPersistent: false);
+
+        return _mapper.Map<User>(user);
     }
 
-    private async Task ValidateCreatePreconditionsForUserAsync(User model)
+    // Need To Solve Check if user already signed in
+    public async Task SignInAsync(User user, string password)
     {
-        if (model is null)
+        var result = await _signInManager.PasswordSignInAsync(user.UserName, password, false, false);
+        if (!result.Succeeded)
         {
-            throw new BadRequestException("The provided model cannot be null");
+            throw new UnauthorizedAccessException("Invalid username or password");
         }
-
-        var pagingRequest = new EntitiesPagingRequest<User>
-        {
-            Filter = user => user.Username == model.Username,
-            PageNumber = 1,
-            PerPage = int.MaxValue,
-        };
-
-        var checkIfUserExistsTask = await _unitOfWork.UserRepository
-            .SearchWithPagingAsync(pagingRequest);
-
-        if (checkIfUserExistsTask != null && checkIfUserExistsTask.Items.Count != 0)
-        {
-            throw new BadRequestException($"User Exists on Name {model.Username}");
-        }
-
     }
 
-    private async Task ValidateUpdatePreconditionsForUserAsync(User model)
+    public async Task SignOutAsync()
     {
-        if (model is null)
+        await _signInManager.SignOutAsync();
+    }
+
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        var users = await _userManager.Users.ToListAsync();
+        return _mapper.Map<List<User>>(users);
+    }
+
+    public async Task<bool> AssignRoleToUser(string userName, UserRoles roleName)
+    {
+        try
         {
-            throw new BadRequestException("The provided model cannot be null");
+            var roleExists = await _roleManager.RoleExistsAsync(roleName.ToString());
+            if (!roleExists)
+            {
+                var newRole = new IdentityRole(roleName.ToString());
+                var result = await _roleManager.CreateAsync(newRole);
+                if (!result.Succeeded)
+                {
+                    return false;
+                }
+            }
+
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return false;
+            }
+
+            if (await _userManager.IsInRoleAsync(user, roleName.ToString()))
+            {
+                var removeFromRoleResult = await _userManager.RemoveFromRoleAsync(user, roleName.ToString());
+                if (!removeFromRoleResult.Succeeded)
+                {
+                    return false;
+                }
+            }
+
+            var roleAssignmentResult = await _userManager.AddToRoleAsync(user, roleName.ToString());
+            if (!roleAssignmentResult.Succeeded)
+            {
+                return false;
+            }
+
+            user.Roles = roleName;
+            await _userManager.UpdateAsync(user);
+
+            return true;
         }
-
-        var pagingRequest = new EntitiesPagingRequest<User>
+        catch (Exception ex)
         {
-            Filter = user => user.Id == model.Id,
-            PageNumber = 1,
-            PerPage = int.MaxValue,
-        };
-
-        var checkIfUserExistsTask = await _unitOfWork.UserRepository
-            .SearchWithPagingAsync(pagingRequest);
-
-        if (checkIfUserExistsTask is null || checkIfUserExistsTask.Items.Count == 0)
-        {
-            throw new BadRequestException($"User Does Not Exists on ID {model.Id}");
+            throw new Exception(ex.Message);
         }
     }
 }

@@ -1,9 +1,15 @@
-﻿namespace Barter.Application.Models.Response;
+﻿using Barter.Domain.Models.Enum;
+using System.ComponentModel.DataAnnotations;
+
+namespace Barter.Application.Models.Response;
 
 public class UserResponse
 {
-    public Guid Id { get; set; }
+    [Required]
+    public string FirstName { get; set; }
 
+    [Required]
+    public string LastName { get; set; }
     public string Username { get; set; }
 
     public string Email { get; set; }
@@ -11,6 +17,8 @@ public class UserResponse
     public string Password { get; set; }
 
     public long MobileNumber { get; set; }
+
+    public UserRoles Roles { get; set; }
 
     public string Address { get; set; }
 
