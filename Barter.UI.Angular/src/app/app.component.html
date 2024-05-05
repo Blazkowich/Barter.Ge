@@ -1,1 +1,2 @@
-<app-categories></app-categories>
+<app-categories (categorySelected)="onCategorySelected($event)"></app-categories>
+<app-items [selectedCategoryId]="selectedCategoryId"></app-items>

@@ -1,1 +1,28 @@
-<p>items works!</p>
+<table style="">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>CategoryId</th>
+      <th>OwnerId</th>
+      <th>ImageUrl</th>
+      <th>Condition</th>
+      <th>ItemType</th>
+      <th>Views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.Id }}</td>
+      <td>{{ item.Name }}</td>
+      <td>{{ item.Description }}</td>
+      <td>{{ item.CategoryId }}</td>
+      <td>{{ item.OwnerId }}</td>
+      <td>{{ item.ImageUrl }}</td>
+      <td>{{ item.Condition }}</td>
+      <td>{{ item.ItemType }}</td>
+      <td>{{ item.Views }}</td>
+    </tr>
+  </tbody>
+</table>

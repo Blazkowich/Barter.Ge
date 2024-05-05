@@ -9,7 +9,9 @@
   <tbody>
     <tr *ngFor="let category of categories">
       <td>{{ category.Id }}</td>
-      <td>{{ category.Name }}</td>
+      <td>
+        <button (click)="onCategoryClick(category.Id)">{{ category.Name }}</button>
+      </td>
     </tr>
   </tbody>
 </table>

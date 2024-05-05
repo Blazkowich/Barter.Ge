@@ -1,14 +1,15 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css'
+  styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
+  @Output() categorySelected: EventEmitter<string> = new EventEmitter<string>(); // დაემატა კატეგორიის ნივთების ჩვენება დაქლიქებისას
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +26,10 @@ export class CategoriesComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching categories:', error);
       }
-    })
+    });
+  }
+
+  onCategoryClick(categoryId: string) {
+    this.categorySelected.emit(categoryId); // დაემატა კატეგორიის ნივთების ჩვენება დაქლიქებისას
   }
 }
